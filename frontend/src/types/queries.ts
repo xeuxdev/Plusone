@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export type QueryResponse<T> = {
   message: string;
   status: number;
@@ -8,3 +10,5 @@ export interface ErrorData {
   message: string;
   validationErrors?: string | [string] | [{ description: string }];
 }
+
+export type QueryError = AxiosError<ErrorData>;

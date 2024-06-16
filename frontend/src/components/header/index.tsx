@@ -19,9 +19,9 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between w-full h-14">
-      <a href="/" className="flex items-center gap-2">
+      <Link to="/" className="flex items-center gap-2">
         <span className="text-xl font-bold">PlusOne</span>
-      </a>
+      </Link>
       <div className="flex items-center gap-4">
         <Icons.search />
         <ThemeToggle />
@@ -41,7 +41,11 @@ export default function Header() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem className="py-0" asChild>
+              <DropdownMenuItem>
+                <Link to={"/dashboard"}>Dashboard</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem className="py-0">
                 <Logout />
               </DropdownMenuItem>
             </DropdownMenuContent>

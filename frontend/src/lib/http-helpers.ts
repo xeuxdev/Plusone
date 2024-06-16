@@ -27,17 +27,11 @@ export const getRequest = async <T>(params: { url: string }) => {
   return data;
 };
 
-export const patchRequest = async <T, P>(params: {
-  url: string;
-  payload: P;
-}) => {
-  const { data } = await axiosClient.patch<T>(params.url, params.payload);
-
-  return data;
-};
-
 export const APIs = {
   registerUser: "/user/register",
   loginUser: "/user/login",
+
+  // posts
   getUserPosts: "/post/me",
+  deletePosts: (id: string) => `/post/${id}/delete`,
 };

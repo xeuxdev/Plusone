@@ -1,6 +1,7 @@
 import { useGetUserPosts } from "@/api/dashboard/get-posts";
 import { Icons } from "@/components/icons";
 import Layout from "@/components/layout";
+import DeletePostsModal from "@/components/modals/delete-post";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
 import { DollarSignIcon, EyeIcon, FileTextIcon } from "lucide-react";
@@ -8,8 +9,6 @@ import { Link } from "react-router-dom";
 
 export default function DashboardPage() {
   const { data, isLoading } = useGetUserPosts();
-
-  console.log(data);
 
   return (
     <Layout>
@@ -57,27 +56,41 @@ export default function DashboardPage() {
                 className="flex flex-wrap items-center justify-between w-full gap-2 p-5 rounded-md bg-muted"
               >
                 <div>
-                  <p className="text-2xl font-semibold">{item.title}</p>
+                  <p className="w-full md:w-[448px] text-2xl font-semibold">
+                    {item.title}
+                  </p>
 
-                  <div className="flex items-center gap-3 *:text-muted-foreground *:capitalize *:text-lg">
-                    <p>published on: {formatDate(item.createdAt.toString())}</p>
-                    <p>edited on: {formatDate(item.updatedAt.toString())}</p>
+                  <div className="flex items-center gap-3 *:text-muted-foreground *:capitalize *:lg:text-base *:text-sm">
+                    <p>
+                      <span className="font-semibold">published on</span>:{" "}
+                      {formatDate(item.createdAt.toString())}
+                    </p>
+                    <p>
+                      <span className="font-semibold">edited on</span>:{" "}
+                      {formatDate(item.updatedAt.toString())}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Icons.likes />
-                  <p>{item.likesCount}</p>
-                  {/* <p>{item.views}</p> */}
-                </div>
+                <div className="flex items-center justify-between w-full gap-5 md:w-fit">
+                  <div className="flex items-center gap-2">
+                    <Icons.likes />
+                    <p>{item.likesCount}</p>
+                    {/* <p>{item.views}</p> */}
+                  </div>
 
-                <div className="flex items-center gap-3">
-                  <Button variant={"link"} className="p-0">
-                    Edit
-                  </Button>
-                  <Button variant={"ghost"} className="p-0">
-                    <Icons.trash className="text-destructive" />
-                  </Button>
+                  <div className="flex items-center gap-3">
+                    <Button variant={"link"} className="p-0" asChild>
+                      <Link to={`/p/${item.id}/edit`}>Edit</Link>
+                    </Button>
+
+                    <DeletePostsModal
+                      data={{
+                        id: item.id,
+                        title: item.title,
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
