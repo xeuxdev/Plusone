@@ -4,6 +4,7 @@ dotenv.config();
 import cors from "cors";
 
 import userRouter from "./routes/user.routes";
+import postRouter from "./routes/post.routes";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // Register API routes
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/post", postRouter);
 
 app.all("*", (req: Request, res: Response) => {
   res

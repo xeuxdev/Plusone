@@ -41,7 +41,7 @@ export default function Header() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem className="py-0">
+              <DropdownMenuItem className="py-0" asChild>
                 <Logout />
               </DropdownMenuItem>
             </DropdownMenuContent>

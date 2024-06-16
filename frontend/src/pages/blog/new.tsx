@@ -1,5 +1,9 @@
-import React from "react";
+import Tiptap from "@/components/tip-tap";
 
 export default function NewBlogPage() {
-  return <div>NewBlogPage</div>;
+  return (
+    <div>
+      <Tiptap />
+    </div>
+  );
 }

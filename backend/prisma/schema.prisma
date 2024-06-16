@@ -13,27 +13,28 @@ model User {
   name     String?
   password String
 
-  posts Post?
+  posts Post[]
 }
 
 model Post {
   id         String    @id @default(cuid())
   title      String
-  content    String
+  content    String    @db.LongText
   likesCount Int       @default(0)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  user_id    String    @unique
+  user_id    String
   comments   Comment[]
 
   author User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  post_id   String
-  post      Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  comment        String   @default("")
+  commenter_name String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  post_id        String
+  post           Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
 }

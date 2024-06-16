@@ -1,7 +1,7 @@
 import { Request } from "express";
 
 export interface APIRequest extends Request {
-  user: {
+  user?: {
     id: string;
     email: string;
   };

@@ -8,6 +8,6 @@ export function APIResponse(
 ) {
   return res.status(status).json({
     message,
-    data,
+    data: data,
   });
 }

@@ -88,3 +88,25 @@ export const convertImageFile = (file: File): FormData => {
 
 export const passwordRegex =
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/;
+
+export const formatDate = (iso: string) => {
+  const date = new Date(iso);
+  const now = new Date();
+  const timeDiff = Math.abs(now.getTime() - date.getTime());
+  const minutes = Math.floor(timeDiff / (1000 * 60));
+  const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const year = date.getFullYear();
+  const month = date.toLocaleDateString("en-US", { month: "short" });
+  const day = date.getDate();
+
+  if (minutes < 60) {
+    return `${minutes} min`;
+  } else if (hours < 24) {
+    return `${hours} hr${hours !== 1 ? "s" : ""}`;
+  } else if (days < 365) {
+    return `${month} ${day}`;
+  } else {
+    return `${month} ${day}, ${year}`;
+  }
+};
