@@ -189,7 +189,7 @@ async function searchPosts(req: Request, res: Response) {
     return APIResponse("No Posts Found", 404, res);
   }
 
-  return APIResponse("Posts Found", 200, res, { posts });
+  return APIResponse("Posts Found", 200, res, posts);
 }
 
 async function createComment(req: APIRequest, res: Response) {

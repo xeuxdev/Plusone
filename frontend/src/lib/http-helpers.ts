@@ -36,6 +36,7 @@ export const APIs = {
   getPostDetails: (id: string) => `/post/${id}`,
   getUserPosts: "/post/me",
   deletePosts: (id: string) => `/post/${id}/delete`,
+  searchPosts: (query: string) => `/post/search?term=${query}`,
 
   // comments
   createComment: (id: string) => `/post/${id}/comments/create`,
