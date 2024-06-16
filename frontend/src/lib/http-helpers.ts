@@ -38,4 +38,5 @@ export const patchRequest = async <T, P>(params: {
 
 export const APIs = {
   registerUser: "/user/register",
+  loginUser: "/user/login",
 };

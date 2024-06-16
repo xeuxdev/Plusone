@@ -37,7 +37,13 @@ async function login(req: Request, res: Response) {
       }
     );
 
-    return APIResponse("Login Successful", 200, res, { token });
+    const userInfo = {
+      token,
+      name: user.name,
+      email: user.email,
+    };
+
+    return APIResponse("Login Successful", 200, res, userInfo);
   } catch (error: any) {
     return APIResponse(error.message, 500, res);
   }
