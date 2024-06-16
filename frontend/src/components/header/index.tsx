@@ -18,43 +18,47 @@ export default function Header() {
   const { user } = useUserStore();
 
   return (
-    <header className="flex items-center justify-between w-full h-14">
-      <Link to="/" className="flex items-center gap-2">
-        <span className="text-xl font-bold">PlusOne</span>
-      </Link>
-      <div className="flex items-center gap-4">
-        <Icons.search />
-        <ThemeToggle />
+    <header className="fixed z-50 w-full h-16 border-b-2 bg-background">
+      <div className="flex items-center justify-between h-full max-w-6xl px-5 mx-auto ">
+        <Link to="/" className="flex items-center gap-2">
+          <span className="text-xl font-bold">PlusOne</span>
+        </Link>
+        <div className="flex items-center gap-4">
+          <Icons.search />
+          <ThemeToggle />
 
-        {user ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar>
-                <AvatarImage src={`https://api.multiavatar.com/plusone`} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>
-                <p className="capitalize">{user?.name}</p>
-                <p>{user?.email}</p>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar>
+                  <AvatarImage
+                    src={`https://api.multiavatar.com/${user.name}.svg`}
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>
+                  <p className="capitalize">{user?.name}</p>
+                  <p>{user?.email}</p>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
 
-              <DropdownMenuItem>
-                <Link to={"/dashboard"}>Dashboard</Link>
-              </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to={"/dashboard"}>Dashboard</Link>
+                </DropdownMenuItem>
 
-              <DropdownMenuItem className="py-0">
-                <Logout />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <Button asChild>
-            <Link to="/login">Login</Link>
-          </Button>
-        )}
+                <DropdownMenuItem className="py-0">
+                  <Logout />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild>
+              <Link to="/login">Login</Link>
+            </Button>
+          )}
+        </div>
       </div>
     </header>
   );

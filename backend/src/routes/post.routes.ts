@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get("/me", verifyUserToken, postController.getUserPosts);
 
+router.get("/all", postController.getPosts);
+
 router.post("/create", verifyUserToken, postController.createPost);
 router.get("/search", postController.searchPosts);
 

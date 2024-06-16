@@ -2,7 +2,9 @@ import {
   Eye,
   EyeOff,
   HeartIcon,
+  Image,
   Loader,
+  MoveLeftIcon,
   PlusIcon,
   Search,
   Trash,
@@ -16,4 +18,6 @@ export const Icons = {
   likes: HeartIcon,
   trash: Trash,
   add: PlusIcon,
+  image: Image,
+  arrowLeft: MoveLeftIcon,
 };

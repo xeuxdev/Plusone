@@ -45,7 +45,7 @@ export default function DashboardPage() {
         </header>
 
         {isLoading ? (
-          <div>Loading...</div>
+          <Icons.spinner />
         ) : !data || data?.length === 0 ? (
           <div>No Posts yet</div>
         ) : (
@@ -56,9 +56,12 @@ export default function DashboardPage() {
                 className="flex flex-wrap items-center justify-between w-full gap-2 p-5 rounded-md bg-muted"
               >
                 <div>
-                  <p className="w-full md:w-[448px] text-2xl font-semibold">
+                  <Link
+                    to={`/p/${item.id}`}
+                    className="w-full md:w-[448px] text-2xl font-semibold"
+                  >
                     {item.title}
-                  </p>
+                  </Link>
 
                   <div className="flex items-center gap-3 *:text-muted-foreground *:capitalize *:lg:text-base *:text-sm">
                     <p>

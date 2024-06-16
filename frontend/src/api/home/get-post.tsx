@@ -12,20 +12,23 @@ type Response = QueryResponse<
     createdAt: Date;
     updatedAt: Date;
     user_id: string;
+    author: {
+      name: string;
+    };
   }[]
 >;
 
-async function getUserPosts() {
+async function getAllPosts() {
   const data = await getRequest<Response>({
-    url: APIs.getUserPosts,
+    url: APIs.getAllPosts,
   });
 
   return data.data;
 }
 
-export function useGetUserPosts() {
+export function useGetPosts() {
   return useQuery({
-    queryKey: ["get-user-posts"],
-    queryFn: getUserPosts,
+    queryKey: ["get-posts"],
+    queryFn: getAllPosts,
   });
 }

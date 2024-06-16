@@ -32,6 +32,11 @@ export const APIs = {
   loginUser: "/user/login",
 
   // posts
+  getAllPosts: "/post/all",
+  getPostDetails: (id: string) => `/post/${id}`,
   getUserPosts: "/post/me",
   deletePosts: (id: string) => `/post/${id}/delete`,
+
+  // comments
+  createComment: (id: string) => `/post/${id}/comments/create`,
 };

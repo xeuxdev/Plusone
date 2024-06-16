@@ -3,6 +3,28 @@ import db from "../config/db";
 import { APIResponse } from "../config/response";
 import { APIRequest } from "../types";
 
+async function getPosts(req: Request, res: Response) {
+  const posts = await db.post.findMany({
+    orderBy: {
+      updatedAt: "desc",
+    },
+    take: 20,
+    include: {
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
+  if (!posts) {
+    return APIResponse("Failed to Fetch Posts", 500, res);
+  }
+
+  return APIResponse("Success", 200, res, posts);
+}
+
 async function getUserPosts(req: APIRequest, res: Response) {
   if (!req.user) {
     return APIResponse("Unauthorized", 400, res);
@@ -127,7 +149,17 @@ async function getPostById(req: APIRequest, res: Response) {
       id: id,
     },
     include: {
-      comments: true,
+      comments: {
+        orderBy: {
+          updatedAt: "desc",
+        },
+      },
+      author: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
     },
   });
 
@@ -160,7 +192,7 @@ async function searchPosts(req: Request, res: Response) {
   return APIResponse("Posts Found", 200, res, { posts });
 }
 
-async function createComment(req: Request, res: Response) {
+async function createComment(req: APIRequest, res: Response) {
   const { comment, commenter_name } = req.body;
   const { id: post_id } = req.params;
 
@@ -208,6 +240,7 @@ async function likePost(req: Request, res: Response) {}
 async function updatePostViews(req: Request, res: Response) {}
 
 export default {
+  getPosts,
   getUserPosts,
   createPost,
   editPost,
