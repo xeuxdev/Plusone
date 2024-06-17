@@ -33,7 +33,7 @@ async function login(req: Request, res: Response) {
       { email: user.email, id: user.id },
       process.env.JWT_SECRET as string,
       {
-        expiresIn: "2h",
+        expiresIn: "24h",
       }
     );
 

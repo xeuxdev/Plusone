@@ -37,6 +37,9 @@ async function getUserPosts(req: APIRequest, res: Response) {
       where: {
         user_id: id,
       },
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
 
     if (!posts) {

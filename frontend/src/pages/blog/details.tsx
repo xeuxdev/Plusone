@@ -19,7 +19,7 @@ export default function BlogDetailsPage() {
       ) : (
         <>
           <BackButton />
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <section className="flex flex-col gap-10">
               <div className="relative w-full h-40 overflow-hidden rounded-md md:h-64 bg-secondary">
                 {data?.image ? (
@@ -41,7 +41,13 @@ export default function BlogDetailsPage() {
                 </p>
               </div>
 
-              <div className="p-2 *:text-lg md:*:text-xl">{data.content}</div>
+              <div
+                className="p-2 *:text-lg md:*:text-xl w-full"
+                dangerouslySetInnerHTML={{
+                  __html: data.content.toString(),
+                }}
+              />
+              {/* <div className="p-2 *:text-lg md:*:text-xl">{data.content}</div> */}
             </section>
 
             <section className="py-12 md:py-20 lg:py-24">

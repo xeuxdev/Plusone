@@ -1,13 +1,22 @@
+import { DividerHorizontalIcon, ListBulletIcon } from "@radix-ui/react-icons";
 import {
+  BoldIcon,
+  Code2Icon,
   Eye,
   EyeOff,
   HeartIcon,
   Image,
+  ItalicIcon,
+  ListOrdered,
   Loader,
   MoveLeftIcon,
+  Pilcrow,
   PlusIcon,
+  Quote,
   Search,
+  StrikethroughIcon,
   Trash,
+  UnderlineIcon,
 } from "lucide-react";
 
 export const Icons = {
@@ -20,4 +29,15 @@ export const Icons = {
   add: PlusIcon,
   image: Image,
   arrowLeft: MoveLeftIcon,
+
+  bold: BoldIcon,
+  strikeThrough: StrikethroughIcon,
+  italic: ItalicIcon,
+  underline: UnderlineIcon,
+  paragraph: Pilcrow,
+  bulletList: ListBulletIcon,
+  orderedList: ListOrdered,
+  codeBlock: Code2Icon,
+  blockQuote: Quote,
+  horizontalRule: DividerHorizontalIcon,
 };

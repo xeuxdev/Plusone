@@ -110,3 +110,28 @@ export const formatDate = (iso: string) => {
     return `${month} ${day}, ${year}`;
   }
 };
+
+export function getFirstH1Content(htmlString: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+
+  const firstH1 = doc.querySelector("h1.font-bold");
+
+  if (firstH1) {
+    return firstH1.textContent;
+  } else {
+    return "";
+  }
+}
+
+export function stripFirstH1(htmlString: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+
+  const firstH1 = doc.querySelector("h1.font-bold");
+
+  if (firstH1) {
+    firstH1?.parentNode?.removeChild(firstH1);
+  }
+  return doc.body.innerHTML;
+}
