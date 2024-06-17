@@ -19,9 +19,11 @@ const CustomDocument = Document.extend({
 export default function MarkdownEditor({
   content,
   setContent,
+  type = "new",
 }: {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
+  type?: "new" | "edit";
 }) {
   const editor = useEditor({
     extensions: [
@@ -64,12 +66,12 @@ export default function MarkdownEditor({
     onUpdate: ({ editor }) => {
       const content = editor.getHTML();
       setContent(content);
-      localStorage.setItem("new-post", JSON.stringify(content));
+      localStorage.setItem(`${type}-post`, JSON.stringify(content));
     },
     editorProps: {
       attributes: {
         class:
-          "min-h-[80vh] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          "min-h-[70vh] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       },
     },
   });

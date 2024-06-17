@@ -2,18 +2,25 @@ import { APIs, getRequest } from "@/lib/http-helpers";
 import { QueryResponse } from "@/types/queries";
 import { useQuery } from "@tanstack/react-query";
 
-type Response = QueryResponse<
-  {
+type Response = QueryResponse<{
+  posts: ({
+    _count: {
+      comments: number;
+    };
+  } & {
     id: string;
     title: string;
     content: string;
-    image: string;
+    full_content: string;
+    image: string | null;
     likesCount: number;
     createdAt: Date;
     updatedAt: Date;
     user_id: string;
-  }[]
->;
+  })[];
+  numOfPosts: number;
+  numOfComments: number;
+}>;
 
 async function getUserPosts() {
   const data = await getRequest<Response>({

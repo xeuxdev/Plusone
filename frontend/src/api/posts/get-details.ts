@@ -21,6 +21,7 @@ type Response = QueryResponse<
       id: string;
       title: string;
       content: string;
+      full_content: string;
       image: string | null;
       likesCount: number;
       createdAt: Date;

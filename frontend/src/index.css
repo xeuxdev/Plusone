@@ -79,3 +79,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-wrap: pretty;
+}
+
+blockquote {
+  margin-left: 40px;
+  margin-block: 1rem;
+  padding-inline: 20px;
+  font-style: italic;
+  border-left: 3px solid #cccccc;
+}
+
+pre:not(:is(blockquote pre)) {
+  font-family: monospace;
+  text-wrap: pretty;
+
+  @apply p-5 my-2 text-sm rounded-sm bg-muted;
+}

@@ -17,15 +17,16 @@ model User {
 }
 
 model Post {
-  id         String    @id @default(cuid())
-  title      String
-  content    String    @db.LongText
-  image      String?   @db.LongText
-  likesCount Int       @default(0)
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  user_id    String
-  comments   Comment[]
+  id           String    @id @default(cuid())
+  title        String
+  content      String    @db.LongText
+  full_content String    @db.LongText
+  image        String?   @db.LongText
+  likesCount   Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  user_id      String
+  comments     Comment[]
 
   author User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

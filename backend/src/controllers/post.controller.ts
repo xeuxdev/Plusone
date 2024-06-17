@@ -40,13 +40,37 @@ async function getUserPosts(req: APIRequest, res: Response) {
       orderBy: {
         updatedAt: "desc",
       },
+      include: {
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
     });
+
+    const numOfPosts = await db.post.count({
+      where: {
+        user_id: id,
+      },
+    });
+
+    const numOfComments = posts.reduce(
+      (acc, cur) => acc + cur._count.comments,
+      0
+    );
+
+    const payload = {
+      posts,
+      numOfPosts,
+      numOfComments,
+    };
 
     if (!posts) {
       throw Error("unable to find posts");
     }
 
-    return APIResponse("success", 200, res, posts);
+    return APIResponse("success", 200, res, payload);
   } catch (error: any) {
     return APIResponse(error.message, 500, res);
   }
@@ -58,7 +82,11 @@ async function createPost(req: APIRequest, res: Response) {
   }
 
   const { id } = req.user;
-  const { title, content } = req.body;
+  const { title, content, full_content } = req.body;
+
+  if (!title || !content || !full_content) {
+    return APIResponse("Bad Request", 400, res);
+  }
 
   const user = await db.user.findUnique({
     where: {
@@ -74,6 +102,7 @@ async function createPost(req: APIRequest, res: Response) {
     data: {
       title: title,
       content: content,
+      full_content: full_content,
       author: {
         connect: {
           id: user.id,
@@ -95,7 +124,11 @@ async function editPost(req: APIRequest, res: Response) {
   }
 
   const { id: post_id } = req.params;
-  const { title, content } = req.body;
+  const { title, content, full_content } = req.body;
+
+  if (!title || !content || !full_content) {
+    return APIResponse("Bad Request", 400, res);
+  }
 
   const editPost = await db.post.update({
     where: {
@@ -104,6 +137,7 @@ async function editPost(req: APIRequest, res: Response) {
     data: {
       title: title,
       content: content,
+      full_content: full_content,
     },
   });
 
@@ -111,7 +145,7 @@ async function editPost(req: APIRequest, res: Response) {
     return APIResponse("Failed to update post", 500, res);
   }
 
-  return APIResponse("Successfully Edited Post", 200, res);
+  return APIResponse("Successfully Edited Post", 200, res, { id: editPost.id });
 }
 
 async function deletePost(req: APIRequest, res: Response) {

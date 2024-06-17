@@ -27,6 +27,8 @@ async function seed() {
         data: {
           title: faker.lorem.sentence({ min: 3, max: 8 }),
           content: faker.lorem.paragraphs({ min: 3, max: 10 }),
+          full_content: faker.lorem.paragraphs({ min: 3, max: 10 }),
+          image: faker.image.urlPicsumPhotos(),
           author: {
             connect: {
               id: user.id,

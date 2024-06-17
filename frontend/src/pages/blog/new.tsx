@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const defaultContent = `
     <h1>
@@ -20,15 +19,15 @@ const defaultContent = `
 export type CreatePostType = {
   title: string;
   content: string;
+  full_content: string;
 };
 
 export default function NewBlogPage() {
   const [content, setContent] = useState(defaultContent);
   const [showPreview, setShowPreview] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const navigate = useNavigate();
 
-  const { mutateAsync, isPending } = useCreatePost();
+  const { mutate: createPost, isPending } = useCreatePost();
 
   function handleCreatePost() {
     const title = getFirstH1Content(content);
@@ -41,23 +40,11 @@ export default function NewBlogPage() {
     const payload = {
       title,
       content: newContent,
+      full_content: content,
     };
 
-    mutateAsync(payload).then((res) => {
-      navigate(`/p/${res.data.id}`);
-      localStorage.removeItem("new-post");
-    });
-
-    // console.log(payload);
+    createPost(payload);
   }
-
-  // useEffect(() => {
-  //   const content = JSON.parse(localStorage.getItem("new-post") || "");
-  //   console.log(content, "content");
-  //   if (content) {
-  //     setContent(content);
-  //   }
-  // }, []);
 
   useEffect(() => {
     const content = localStorage.getItem("new-post");

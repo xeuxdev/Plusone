@@ -37,7 +37,7 @@ export default function Header() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Avatar>
+                  <Avatar className="w-6 h-6 md:h-8 md:w-8">
                     <AvatarImage
                       src={`https://api.multiavatar.com/${user.name}.svg`}
                     />

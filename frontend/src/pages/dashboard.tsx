@@ -4,7 +4,6 @@ import Layout from "@/components/layout";
 import DeletePostsModal from "@/components/modals/delete-post";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
-import { DollarSignIcon, EyeIcon, FileTextIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function DashboardPage() {
@@ -15,19 +14,19 @@ export default function DashboardPage() {
       <section className="w-full rounded-lg shadow-md">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
           <div className="flex flex-col items-center justify-center col-span-1 p-4 rounded-lg bg-muted">
-            <FileTextIcon className="w-8 h-8 text-muted-foreground" />
-            <h3 className="mt-2 text-2xl font-bold">1,234</h3>
+            <Icons.posts className="w-8 h-8 text-muted-foreground" />
+            <h3 className="mt-2 text-2xl font-bold">{data?.numOfPosts}</h3>
             <p className="text-muted-foreground">Total Posts</p>
           </div>
           <div className="flex flex-col items-center justify-center col-span-1 p-4 rounded-lg bg-muted">
-            <EyeIcon className="w-8 h-8 text-muted-foreground" />
+            <Icons.views className="w-8 h-8 text-muted-foreground" />
             <h3 className="mt-2 text-2xl font-bold">45,678</h3>
             <p className="text-muted-foreground">Total Views</p>
           </div>
 
           <div className="flex flex-col items-center justify-center col-span-1 p-4 rounded-lg bg-muted">
-            <DollarSignIcon className="w-8 h-8 text-muted-foreground" />
-            <h3 className="mt-2 text-2xl font-bold">457</h3>
+            <Icons.comments className="w-8 h-8 text-muted-foreground" />
+            <h3 className="mt-2 text-2xl font-bold">{data?.numOfComments}</h3>
             <p className="text-muted-foreground">Total Comments</p>
           </div>
         </div>
@@ -46,11 +45,11 @@ export default function DashboardPage() {
 
         {isLoading ? (
           <Icons.spinner />
-        ) : !data || data?.length === 0 ? (
+        ) : !data || data?.posts?.length === 0 ? (
           <div>No Posts yet</div>
         ) : (
           <div className="flex flex-col w-full gap-4">
-            {data?.map((item) => (
+            {data.posts?.map((item) => (
               <div
                 key={item.id}
                 className="flex flex-wrap items-center justify-between w-full gap-2 p-5 rounded-md bg-muted"

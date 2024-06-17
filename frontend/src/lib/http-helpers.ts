@@ -38,6 +38,7 @@ export const APIs = {
   deletePosts: (id: string) => `/post/${id}/delete`,
   searchPosts: (query: string) => `/post/search?term=${query}`,
   createPost: "/post/create",
+  editPost: (id: string) => `/post/${id}/edit`,
 
   // comments
   createComment: (id: string) => `/post/${id}/comments/create`,

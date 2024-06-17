@@ -44,7 +44,12 @@ export default function HomePage() {
                   >
                     {post.title}
                   </Link>
-                  <p className="line-clamp-2">{post.content}</p>
+                  <div
+                    className="line-clamp-2"
+                    dangerouslySetInnerHTML={{
+                      __html: post.content,
+                    }}
+                  />
                 </div>
 
                 <div className="flex items-center gap-3">

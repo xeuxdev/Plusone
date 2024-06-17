@@ -72,8 +72,12 @@ export default function SearchPosts({
                   <Link to={`/p/${post.id}`}>
                     <CardHeader className="pb-2">
                       <CardTitle>{post.title}</CardTitle>
-                      <CardDescription className=" line-clamp-2">
-                        {post.content}
+                      <CardDescription className="line-clamp-2">
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: post.content,
+                          }}
+                        />
                       </CardDescription>
                     </CardHeader>
 
