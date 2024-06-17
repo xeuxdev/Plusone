@@ -11,8 +11,8 @@ export default function DashboardPage() {
 
   return (
     <Layout>
-      <section className="w-full rounded-lg shadow-md">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 md:grid-cols-2">
+      <section className="w-full rounded-lg">
+        <div className="grid grid-cols-1 min-[375px]:grid-cols-2 gap-6 sm:grid-cols-3">
           <div className="flex flex-col items-center justify-center col-span-1 p-4 rounded-lg bg-muted">
             <Icons.posts className="w-8 h-8 text-muted-foreground" />
             <h3 className="mt-2 text-2xl font-bold">{data?.numOfPosts}</h3>
@@ -20,7 +20,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex flex-col items-center justify-center col-span-1 p-4 rounded-lg bg-muted">
             <Icons.views className="w-8 h-8 text-muted-foreground" />
-            <h3 className="mt-2 text-2xl font-bold">45,678</h3>
+            <h3 className="mt-2 text-2xl font-bold">{data?.totalViews}</h3>
             <p className="text-muted-foreground">Total Views</p>
           </div>
 
@@ -76,9 +76,8 @@ export default function DashboardPage() {
 
                 <div className="flex items-center justify-between w-full gap-5 md:w-fit">
                   <div className="flex items-center gap-2">
-                    <Icons.likes />
-                    <p>{item.likesCount}</p>
-                    {/* <p>{item.views}</p> */}
+                    <Icons.views />
+                    <p>{item.viewCount}</p>
                   </div>
 
                   <div className="flex items-center gap-3">

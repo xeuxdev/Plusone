@@ -1,4 +1,4 @@
-import { useGetPostDetails } from "@/api/posts/get-details";
+import { useGetPostDetails } from "@/api/posts/get-post-details";
 import BackButton from "@/components/back-button";
 import { Icons } from "@/components/icons";
 import Layout from "@/components/layout";
@@ -47,7 +47,6 @@ export default function BlogDetailsPage() {
                   __html: data.content.toString(),
                 }}
               />
-              {/* <div className="p-2 *:text-lg md:*:text-xl">{data.content}</div> */}
             </section>
 
             <section className="py-12 md:py-20 lg:py-24">

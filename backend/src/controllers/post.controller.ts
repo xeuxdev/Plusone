@@ -60,10 +60,13 @@ async function getUserPosts(req: APIRequest, res: Response) {
       0
     );
 
+    const totalViews = posts.reduce((acc, cur) => acc + cur.viewCount, 0);
+
     const payload = {
       posts,
       numOfPosts,
       numOfComments,
+      totalViews,
     };
 
     if (!posts) {
@@ -204,6 +207,17 @@ async function getPostById(req: APIRequest, res: Response) {
     return APIResponse("Post not found", 404, res);
   }
 
+  await db.post.update({
+    where: {
+      id: post.id,
+    },
+    data: {
+      viewCount: {
+        increment: 1,
+      },
+    },
+  });
+
   return APIResponse("Post Found", 200, res, post);
 }
 
@@ -272,10 +286,6 @@ async function getComments(req: Request, res: Response) {
   return APIResponse("Comments Found", 200, res, { comments });
 }
 
-async function likePost(req: Request, res: Response) {}
-
-async function updatePostViews(req: Request, res: Response) {}
-
 export default {
   getPosts,
   getUserPosts,
@@ -286,6 +296,4 @@ export default {
   searchPosts,
   createComment,
   getComments,
-  likePost,
-  updatePostViews,
 };

@@ -1,5 +1,5 @@
 import { useEditPost } from "@/api/posts/edit-post";
-import { useGetPostDetails } from "@/api/posts/get-details";
+import { useGetPostDetails } from "@/api/posts/get-post-details";
 import MarkdownEditor from "@/components/editor/markdown";
 import PostPreview from "@/components/editor/preview";
 import { Icons } from "@/components/icons";

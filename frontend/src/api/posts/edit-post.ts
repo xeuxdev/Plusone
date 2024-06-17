@@ -1,6 +1,6 @@
 import { APIs, putRequest } from "@/lib/http-helpers";
 import { displayQueryError, showSuccess } from "@/lib/utils";
-import { EditPostType } from "@/pages/blog/edit";
+import { EditPostType } from "@/pages/posts/edit";
 import { QueryError, QueryResponse } from "@/types/queries";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";

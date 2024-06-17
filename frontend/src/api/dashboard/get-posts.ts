@@ -14,12 +14,14 @@ type Response = QueryResponse<{
     full_content: string;
     image: string | null;
     likesCount: number;
+    viewCount: number;
     createdAt: Date;
     updatedAt: Date;
     user_id: string;
   })[];
   numOfPosts: number;
   numOfComments: number;
+  totalViews: number;
 }>;
 
 async function getUserPosts() {
