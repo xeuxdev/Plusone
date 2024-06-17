@@ -19,11 +19,13 @@ type Props = {
 };
 
 export default function DeletePostsModal({ data }: Props) {
-  const { mutate, isPending } = useDeletePost();
+  const { mutateAsync, isPending } = useDeletePost();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   function handleDeletePost() {
-    mutate(data.id);
+    mutateAsync(data.id).then(() => {
+      setOpenDeleteModal(false);
+    });
   }
 
   return (

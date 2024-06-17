@@ -1,7 +1,7 @@
 import { APIs, deleteRequest } from "@/lib/http-helpers";
 import { displayQueryError, showSuccess } from "@/lib/utils";
 import { QueryError } from "@/types/queries";
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 async function deletePost(id: string) {
   return deleteRequest<{ message: string }>({
@@ -10,7 +10,7 @@ async function deletePost(id: string) {
 }
 
 export function useDeletePost() {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["delete-post"],

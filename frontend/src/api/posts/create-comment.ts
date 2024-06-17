@@ -2,7 +2,7 @@ import { CreateCommentType } from "@/components/posts/comment-form";
 import { APIs, postRequest } from "@/lib/http-helpers";
 import { displayQueryError, showSuccess } from "@/lib/utils";
 import { QueryError, QueryResponse } from "@/types/queries";
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 async function createComment(values: CreateCommentType) {
   return postRequest<QueryResponse<{ message: string }>, CreateCommentType>({
@@ -12,7 +12,7 @@ async function createComment(values: CreateCommentType) {
 }
 
 export function useCreateComment() {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ["create-comment"],
