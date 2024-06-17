@@ -10,6 +10,7 @@ import StarterKit from "@tiptap/starter-kit";
 import React from "react";
 
 import { MenuBar } from "./menus";
+import Underline from "@tiptap/extension-underline";
 
 const CustomDocument = Document.extend({
   content: "heading block*",
@@ -27,6 +28,7 @@ export default function MarkdownEditor({
       Highlight,
       Typography,
       CustomDocument,
+      Underline,
       StarterKit.configure({
         document: false,
         heading: {
