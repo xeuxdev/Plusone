@@ -23,7 +23,10 @@ export default function BlogDetailsPage() {
             <section className="flex flex-col gap-10">
               <div className="relative w-full h-40 overflow-hidden rounded-md md:h-64 bg-secondary">
                 {data?.image ? (
-                  <img src={data?.image} />
+                  <img
+                    src={data?.image}
+                    className="object-cover w-full h-full"
+                  />
                 ) : (
                   <div className="grid w-full h-full place-items-center">
                     <Icons.image className="w-2/4 mx-auto h-2/4" />
