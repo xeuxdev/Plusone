@@ -41,6 +41,7 @@ async function login(req: Request, res: Response) {
       token,
       name: user.name,
       email: user.email,
+      id: user.id,
     };
 
     return APIResponse("Login Successful", 200, res, userInfo);

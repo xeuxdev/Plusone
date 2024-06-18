@@ -13,8 +13,9 @@ export function verifyUserToken(
   try {
     token = token.split(" ")[1];
 
-    if (token === "null" || !token)
+    if (token === "null" || !token) {
       return APIResponse("Unauthorized request", 401, res);
+    }
 
     const verifiedUser = jwt.verify(
       token,
