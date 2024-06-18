@@ -8,7 +8,20 @@ import postRouter from "./routes/post.routes";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
-app.use(cors());
+
+const allowedOrigins = [process.env.FRONTEND_URL];
+
+const corsOptions = (req: Request, callback: Function) => {
+  let corsOptions;
+  if (allowedOrigins.indexOf(req.header("Origin")) !== -1) {
+    corsOptions = { origin: true };
+  } else {
+    corsOptions = { origin: false };
+  }
+  callback(null, corsOptions);
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json()); // Add this line to parse JSON request bodies
 
