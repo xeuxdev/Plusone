@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Layout from "./layout";
 import { Button } from "./ui/button";
 
 export default function NotFound({
@@ -10,7 +9,7 @@ export default function NotFound({
   const navigate = useNavigate();
 
   return (
-    <Layout>
+    <>
       <h1>We Could Not find the {resource_name} you were looking for</h1>
 
       <Button
@@ -20,6 +19,6 @@ export default function NotFound({
       >
         Go back
       </Button>
-    </Layout>
+    </>
   );
 }

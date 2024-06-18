@@ -1,6 +1,7 @@
 import { useGetPostDetails } from "@/api/posts/get-post-details";
 import BackButton from "@/components/back-button";
 import { Icons } from "@/components/icons";
+import NotFound from "@/components/not-found";
 import PostCommentForm from "@/components/posts/comment-form";
 import Loader from "@/components/ui/loader";
 import { formatDate } from "@/lib/utils";
@@ -10,6 +11,10 @@ export default function BlogDetailsPage() {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (!data) {
+    return <NotFound resource_name="post" />;
   }
 
   return (

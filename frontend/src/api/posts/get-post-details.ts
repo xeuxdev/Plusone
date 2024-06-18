@@ -32,7 +32,7 @@ type Response = QueryResponse<
   | null
 >;
 
-async function getPostDetails(id: string) {
+export async function getPostDetails(id: string) {
   const { data } = await getRequest<Response>({
     url: APIs.getPostDetails(id),
   });
@@ -40,12 +40,15 @@ async function getPostDetails(id: string) {
   return data;
 }
 
-export function useGetPostDetails() {
+export function useGetPostDetails(postId?: string) {
   const { id } = useParams();
+
+  const post_id = (postId || id) as string;
 
   return useQuery({
     queryKey: ["get-post-details"],
-    queryFn: () => getPostDetails(id!),
+    queryFn: () => getPostDetails(post_id),
     refetchOnWindowFocus: false,
+    staleTime: 50,
   });
 }

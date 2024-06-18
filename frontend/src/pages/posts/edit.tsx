@@ -1,12 +1,16 @@
 import { useEditPost } from "@/api/posts/edit-post";
-import { useGetPostDetails } from "@/api/posts/get-post-details";
+import {
+  getPostDetails,
+  useGetPostDetails,
+} from "@/api/posts/get-post-details";
 import MarkdownEditor from "@/components/editor/markdown";
 import PostPreview from "@/components/editor/preview";
-import { Icons } from "@/components/icons";
 import NotFound from "@/components/not-found";
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/ui/loader";
 import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export type EditPostType = {
   title: string;
@@ -16,8 +20,9 @@ export type EditPostType = {
 };
 
 export default function EditBlogPage() {
-  const { mutate: editPost, isPending } = useEditPost();
+  const { id } = useParams();
   const { data, isLoading } = useGetPostDetails();
+  const { mutate: editPost, isPending } = useEditPost();
 
   const [content, setContent] = useState(data?.full_content || "");
   const [showPreview, setShowPreview] = useState(false);
@@ -42,27 +47,21 @@ export default function EditBlogPage() {
   }
 
   useEffect(() => {
-    if (data?.content) {
-      setContent(data.full_content);
-    }
-  }, [data]);
+    const fetchData = async () => {
+      const data = await getPostDetails(id!);
+      setContent(data?.full_content || "");
+      setIsMounted(true);
+    };
 
-  useEffect(() => {
-    if (!data) return;
+    fetchData();
+  }, [id]);
 
-    setIsMounted(true);
-  }, [data]);
+  if (!isMounted || isLoading) {
+    return <Loader />;
+  }
 
   if (!data) {
     return <NotFound resource_name="post" />;
-  }
-
-  if (!isMounted || isLoading) {
-    return (
-      <div>
-        <Icons.spinner />
-      </div>
-    );
   }
 
   return (
