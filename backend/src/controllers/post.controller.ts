@@ -6,7 +6,7 @@ import { APIRequest } from "../types";
 async function getPosts(req: Request, res: Response) {
   const posts = await db.post.findMany({
     orderBy: {
-      updatedAt: "desc",
+      createdAt: "desc",
     },
     take: 20,
     include: {
@@ -38,7 +38,7 @@ async function getUserPosts(req: APIRequest, res: Response) {
         user_id: id,
       },
       orderBy: {
-        updatedAt: "desc",
+        createdAt: "desc",
       },
       include: {
         _count: {
