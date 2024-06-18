@@ -2,8 +2,13 @@ import { BubbleMenu, Editor } from "@tiptap/react";
 import { Icons } from "../icons";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import UploadPostBannerImage from "../modals/upload-banner";
+import { useState } from "react";
 
 export function MenuBar({ editor }: { editor: Editor | null }) {
+  const [openBannerModal, setOpenBannerModal] = useState(false);
+
   return (
     <>
       {editor && (
@@ -168,7 +173,18 @@ export function MenuBar({ editor }: { editor: Editor | null }) {
             <Icons.horizontalRule />
           </button>
         </div>
+        <Button onClick={() => setOpenBannerModal(true)} variant={"ghost"}>
+          <Icons.image />
+        </Button>
       </div>
+
+      <UploadPostBannerImage
+        data={{
+          editor: editor,
+        }}
+        open={openBannerModal}
+        onOpenChange={setOpenBannerModal}
+      />
     </>
   );
 }

@@ -12,6 +12,7 @@ type Response = {
   token: string;
   name: string;
   email: string;
+  id: string;
 };
 
 export function loginUser(values: LoginType) {
@@ -34,8 +35,6 @@ export function useLoginUser() {
     onSuccess(data) {
       showSuccess(data.message);
 
-      console.log(data.data);
-
       Cookies.set("plusone-auth", data.data.token, {
         secure: true,
         sameSite: "strict",
@@ -46,6 +45,7 @@ export function useLoginUser() {
       setUser({
         name: data.data.name,
         email: data.data.email,
+        id: data.data.id,
       });
 
       navigate("/dashboard");

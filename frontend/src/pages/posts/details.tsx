@@ -4,10 +4,12 @@ import { Icons } from "@/components/icons";
 import NotFound from "@/components/not-found";
 import PostCommentForm from "@/components/posts/comment-form";
 import Loader from "@/components/ui/loader";
-import { formatDate } from "@/lib/utils";
+import { formatDate, stripFirstImg } from "@/lib/utils";
 
 export default function BlogDetailsPage() {
   const { data, isLoading, error } = useGetPostDetails();
+
+  const body = stripFirstImg(data?.content || "");
 
   if (isLoading) {
     return <Loader />;
@@ -25,11 +27,14 @@ export default function BlogDetailsPage() {
         <>
           <BackButton />
           <section className="flex flex-col w-full gap-10">
-            <div className="relative w-full h-40 overflow-hidden rounded-md md:h-64 bg-secondary">
+            <div className="relative w-full h-40 overflow-hidden rounded-md md:h-64 ">
               {data?.image ? (
-                <img src={data?.image} className="object-cover w-full h-full" />
+                <img
+                  src={data?.image}
+                  className="object-contain w-full h-full"
+                />
               ) : (
-                <div className="grid w-full h-full place-items-center">
+                <div className="grid w-full h-full place-items-center bg-secondary">
                   <Icons.image className="w-2/4 mx-auto h-2/4" />
                 </div>
               )}
@@ -48,7 +53,7 @@ export default function BlogDetailsPage() {
             <div
               className="p-2 *:text-lg md:*:text-xl w-full"
               dangerouslySetInnerHTML={{
-                __html: data.content.toString(),
+                __html: body,
               }}
             />
           </section>

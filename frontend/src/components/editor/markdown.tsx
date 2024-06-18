@@ -4,6 +4,8 @@ import Document from "@tiptap/extension-document";
 import Highlight from "@tiptap/extension-highlight";
 import { Placeholder } from "@tiptap/extension-placeholder";
 import Typography from "@tiptap/extension-typography";
+import Image from "@tiptap/extension-image";
+import Dropcursor from "@tiptap/extension-dropcursor";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -31,6 +33,8 @@ export default function MarkdownEditor({
       Typography,
       CustomDocument,
       Underline,
+      Image,
+      Dropcursor,
       StarterKit.configure({
         document: false,
         heading: {

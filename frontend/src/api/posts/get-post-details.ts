@@ -16,6 +16,7 @@ type Response = QueryResponse<
     } & {
       author: {
         name: string | null;
+        id: string;
       };
     } & {
       id: string;
@@ -40,14 +41,12 @@ export async function getPostDetails(id: string) {
   return data;
 }
 
-export function useGetPostDetails(postId?: string) {
+export function useGetPostDetails() {
   const { id } = useParams();
-
-  const post_id = (postId || id) as string;
 
   return useQuery({
     queryKey: ["get-post-details"],
-    queryFn: () => getPostDetails(post_id),
+    queryFn: () => getPostDetails(id!),
     refetchOnWindowFocus: false,
     staleTime: 50,
   });

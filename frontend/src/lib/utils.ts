@@ -23,6 +23,13 @@ export function debounce<F extends (...args: string[]) => unknown>(
   };
 }
 
+export const notify = (message: string) => {
+  return toast({
+    description: message,
+    variant: "default",
+  });
+};
+
 export const showSuccess = (message: string) => {
   return toast({
     description: message,
@@ -137,4 +144,20 @@ export function stripFirstH1(htmlString: string) {
     firstH1?.parentNode?.removeChild(firstH1);
   }
   return doc.body.innerHTML;
+}
+
+export function getFirstImageUrl(htmlString: string) {
+  const regex = /<img.*?src="([^"]+)"/;
+  const match = regex.exec(htmlString);
+
+  if (match) {
+    return match[1];
+  } else {
+    return null;
+  }
+}
+
+export function stripFirstImg(htmlString: string) {
+  const regex = /<img.*?>/; // Matches the first img tag (any attributes)
+  return htmlString.replace(regex, "");
 }

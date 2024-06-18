@@ -1,22 +1,25 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { Icons } from "../icons";
-import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
+import {
+  getFirstH1Content,
+  getFirstImageUrl,
+  stripFirstH1,
+  stripFirstImg,
+} from "@/lib/utils";
 
 export default function PostPreview({
-  data,
+  content,
   setShowPreview,
 }: {
-  data: {
-    content: string;
-    image: string;
-  };
+  content: string;
   setShowPreview: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { content, image } = data;
-
   const title = getFirstH1Content(content);
-  const body = stripFirstH1(content);
+  const body = stripFirstH1(stripFirstImg(content));
+  const imageUrl = getFirstImageUrl(content);
+
+  console.log(imageUrl);
 
   return (
     <>
@@ -25,11 +28,11 @@ export default function PostPreview({
       </Button>
 
       <section className="flex flex-col w-full gap-10">
-        <div className="relative w-full h-40 overflow-hidden rounded-md md:h-64 bg-secondary">
-          {image ? (
-            <img src={image} className="object-cover w-full h-full" />
+        <div className="relative w-full h-40 overflow-hidden rounded-md md:h-64 ">
+          {imageUrl ? (
+            <img src={imageUrl} className="object-contain w-full h-full" />
           ) : (
-            <div className="grid w-full h-full place-items-center">
+            <div className="grid w-full h-full place-items-center bg-secondary">
               <Icons.image className="w-2/4 mx-auto h-2/4" />
             </div>
           )}

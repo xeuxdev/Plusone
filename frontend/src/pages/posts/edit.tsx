@@ -9,8 +9,9 @@ import NotFound from "@/components/not-found";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/ui/loader";
 import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
+import useUserStore from "@/store/user";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export type EditPostType = {
   title: string;
@@ -23,6 +24,8 @@ export default function EditBlogPage() {
   const { id } = useParams();
   const { data, isLoading } = useGetPostDetails();
   const { mutate: editPost, isPending } = useEditPost();
+  const navigate = useNavigate();
+  const { user } = useUserStore();
 
   const [content, setContent] = useState(data?.full_content || "");
   const [showPreview, setShowPreview] = useState(false);
@@ -49,12 +52,19 @@ export default function EditBlogPage() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getPostDetails(id!);
+      if (data?.author.id !== user?.id) {
+        navigate(-1);
+        return;
+      }
+
       setContent(data?.full_content || "");
       setIsMounted(true);
     };
 
     fetchData();
-  }, [id]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, user]);
 
   if (!isMounted || isLoading) {
     return <Loader />;
@@ -67,13 +77,7 @@ export default function EditBlogPage() {
   return (
     <>
       {showPreview ? (
-        <PostPreview
-          data={{
-            content: content,
-            image: "",
-          }}
-          setShowPreview={setShowPreview}
-        />
+        <PostPreview content={content} setShowPreview={setShowPreview} />
       ) : (
         <>
           <div className="flex items-center gap-5 ml-auto">

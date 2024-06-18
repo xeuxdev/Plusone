@@ -2,7 +2,7 @@ import { useCreatePost } from "@/api/posts/create-post";
 import MarkdownEditor from "@/components/editor/markdown";
 import PostPreview from "@/components/editor/preview";
 import { Button } from "@/components/ui/button";
-import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
+import { getFirstH1Content, getFirstImageUrl, stripFirstH1 } from "@/lib/utils";
 
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,7 @@ export type CreatePostType = {
   title: string;
   content: string;
   full_content: string;
+  image: string | undefined;
 };
 
 export default function NewBlogPage() {
@@ -31,6 +32,7 @@ export default function NewBlogPage() {
   function handleCreatePost() {
     const title = getFirstH1Content(content);
     const newContent = stripFirstH1(content);
+    const image = getFirstImageUrl(content);
 
     if (!title || !newContent) {
       return;
@@ -40,6 +42,7 @@ export default function NewBlogPage() {
       title,
       content: newContent,
       full_content: content,
+      image: image || "",
     };
 
     createPost(payload);
@@ -56,9 +59,6 @@ export default function NewBlogPage() {
         console.error("Error parsing local storage content:", error);
       }
     }
-  }, []);
-
-  useEffect(() => {
     setIsMounted(true);
   }, []);
 
@@ -69,13 +69,7 @@ export default function NewBlogPage() {
   return (
     <>
       {showPreview ? (
-        <PostPreview
-          data={{
-            content: content,
-            image: "",
-          }}
-          setShowPreview={setShowPreview}
-        />
+        <PostPreview content={content} setShowPreview={setShowPreview} />
       ) : (
         <>
           <div className="flex items-center gap-5 ml-auto">
