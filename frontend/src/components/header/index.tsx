@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed z-50 w-full h-16 border-b-2 bg-background">
+      <header className="fixed inset-0 z-50 w-full h-16 border-b-2 bg-background">
         <div className="flex items-center justify-between h-full max-w-6xl px-5 mx-auto ">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-xl font-bold">PlusOne</span>

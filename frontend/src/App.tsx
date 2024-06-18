@@ -12,54 +12,59 @@ import LoginPage from "./pages/login";
 import NotFoundPage from "./pages/not-found";
 import SignUpPage from "./pages/signup";
 import Providers from "./providers";
+import Layout from "./components/layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/login",
-    element: (
-      <UnProtectedRoute>
-        <LoginPage />
-      </UnProtectedRoute>
-    ),
-  },
-  {
-    path: "/signup",
-    element: <SignUpPage />,
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <ProtectedRoute>
-        <DashboardPage />
-      </ProtectedRoute>
-    ),
+    element: <Layout />,
     errorElement: <ErrorBoundary />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      {
+        path: "/login",
+        element: (
+          <UnProtectedRoute>
+            <LoginPage />
+          </UnProtectedRoute>
+        ),
+      },
+      {
+        path: "/signup",
+        element: <SignUpPage />,
+      },
+
+      {
+        path: "/dashboard",
+        element: (
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/p/:id",
+        element: <BlogDetailsPage />,
+      },
+      {
+        path: "/p/:id/edit",
+        element: (
+          <ProtectedRoute>
+            <EditBlogPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/p/new",
+        element: (
+          <ProtectedRoute>
+            <NewBlogPage />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
 
-  {
-    path: "/p/:id",
-    element: <BlogDetailsPage />,
-  },
-  {
-    path: "/p/:id/edit",
-    element: (
-      <ProtectedRoute>
-        <EditBlogPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/p/new",
-    element: (
-      <ProtectedRoute>
-        <NewBlogPage />
-      </ProtectedRoute>
-    ),
-  },
   {
     path: "*",
     element: <NotFoundPage />,

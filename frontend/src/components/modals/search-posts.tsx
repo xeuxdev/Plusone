@@ -28,8 +28,6 @@ export default function SearchPosts({
   const [searchTerm, setSearchTerm] = useState("");
   const { data, isLoading, refetch, isRefetching } = useSearchPosts(searchTerm);
 
-  console.log(data);
-
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       if (searchTerm === "" || !searchTerm || searchTerm.length < 2) return;
@@ -58,7 +56,7 @@ export default function SearchPosts({
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex flex-col gap-3 pt-32">
+          <div className="flex flex-col items-center gap-3 pt-32">
             {isLoading || isRefetching ? (
               <Icons.spinner />
             ) : !data || data.length === 0 ? (
@@ -83,7 +81,7 @@ export default function SearchPosts({
 
                     <CardContent className="grid gap-3">
                       <div className="flex items-center gap-3">
-                        <p>{formatDate(post.updatedAt.toString())} ago.</p>
+                        <p>{formatDate(post.createdAt.toString())} ago.</p>
                         {"•"}
                       </div>
                       <div className="relative w-full h-40 md:h-52">

@@ -3,7 +3,6 @@ import { useGetPostDetails } from "@/api/posts/get-post-details";
 import MarkdownEditor from "@/components/editor/markdown";
 import PostPreview from "@/components/editor/preview";
 import { Icons } from "@/components/icons";
-import Layout from "@/components/layout";
 import NotFound from "@/components/not-found";
 import { Button } from "@/components/ui/button";
 import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
@@ -67,9 +66,15 @@ export default function EditBlogPage() {
   }
 
   return (
-    <Layout>
+    <>
       {showPreview ? (
-        <PostPreview content={content} setShowPreview={setShowPreview} />
+        <PostPreview
+          data={{
+            content: content,
+            image: "",
+          }}
+          setShowPreview={setShowPreview}
+        />
       ) : (
         <>
           <div className="flex items-center gap-5 ml-auto">
@@ -92,6 +97,6 @@ export default function EditBlogPage() {
           />
         </>
       )}
-    </Layout>
+    </>
   );
 }

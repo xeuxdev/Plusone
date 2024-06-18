@@ -111,7 +111,7 @@ export const formatDate = (iso: string) => {
   }
 };
 
-export function getFirstH1Content(htmlString: string) {
+export function getFirstH1Content(htmlString: string): string {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, "text/html");
 

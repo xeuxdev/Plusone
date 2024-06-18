@@ -77,7 +77,7 @@ export default function MarkdownEditor({
   });
 
   return (
-    <div className="max-w-3xl p-5 mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto space-y-6">
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>
