@@ -1,10 +1,10 @@
-import { BubbleMenu, Editor, FloatingMenu } from "@tiptap/react";
-import { Icons } from "../icons";
-import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
-import UploadPostBannerImage from "../modals/upload-banner";
+import { BubbleMenu, Editor } from "@tiptap/react";
 import { useState } from "react";
+import { Icons } from "../icons";
+import UploadPostBannerImage from "../modals/upload-banner";
+import { Button } from "../ui/button";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 
 export function MenuBar({ editor }: { editor: Editor | null }) {
   const [openBannerModal, setOpenBannerModal] = useState(false);
@@ -48,29 +48,6 @@ export function MenuBar({ editor }: { editor: Editor | null }) {
             </ToggleGroupItem>
           </ToggleGroup>
         </BubbleMenu>
-      )}
-
-      {editor && (
-        <FloatingMenu
-          className="flex items-center py-0 rounded-sm bg-primary"
-          tippyOptions={{ duration: 100 }}
-          editor={editor}
-        >
-          <Button
-            variant={"ghost"}
-            size={"sm"}
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-          >
-            <Icons.bulletList className="w-4 h-4" />
-          </Button>
-          <Button
-            variant={"ghost"}
-            size={"sm"}
-            onClick={() => setOpenBannerModal(true)}
-          >
-            <Icons.image className="w-4 h-4" />
-          </Button>
-        </FloatingMenu>
       )}
 
       <div className="w-full">
@@ -203,6 +180,17 @@ export function MenuBar({ editor }: { editor: Editor | null }) {
             )}
           >
             <Icons.blockQuote />
+          </Button>
+          <Button
+            variant={"ghost"}
+            size={"sm"}
+            className={cn(
+              "px-3 py-2 rounded-sm",
+              editor?.isActive("image") ? "bg-muted" : ""
+            )}
+            onClick={() => setOpenBannerModal(true)}
+          >
+            <Icons.image />
           </Button>
           <Button
             onClick={() => editor?.chain().focus().setHorizontalRule().run()}
