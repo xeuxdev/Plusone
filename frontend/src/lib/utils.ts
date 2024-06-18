@@ -111,17 +111,20 @@ export const formatDate = (iso: string) => {
   }
 };
 
-export function getFirstH1Content(htmlString: string): string {
+export function getFirstH1Content(htmlString: string) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, "text/html");
+  let text = "";
 
   const firstH1 = doc.querySelector("h1.font-bold");
 
-  if (firstH1) {
-    return firstH1.textContent;
+  if (!firstH1) {
+    return text;
   } else {
-    return "";
+    text = firstH1.textContent || "";
   }
+
+  return text;
 }
 
 export function stripFirstH1(htmlString: string) {
