@@ -32,7 +32,7 @@ export const APIs = {
   loginUser: "/user/login",
 
   // posts
-  getAllPosts: "/post/all",
+  getAllPosts: (cursor?: number) => `/post/all?cursor=${cursor ? cursor : 0}`,
   getPostDetails: (id: string) => `/post/${id}`,
   getUserPosts: "/post/me",
   deletePosts: (id: string) => `/post/${id}/delete`,
