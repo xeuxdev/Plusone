@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Textarea } from "../ui/textarea";
+import { Icons } from "../icons";
 
 type Props = {
   post_id: string;
@@ -50,33 +51,33 @@ export default function PostCommentForm({ post_id }: Props) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmitComment)}
-          className="flex flex-col items-center w-full gap-5 md:flex-row"
+          className="relative flex flex-col items-center w-full gap-5 md:flex-row"
         >
           <FormField
             control={form.control}
             name="comment"
             render={({ field }) => (
-              <FormItem className="w-full">
+              <FormItem className="w-full h-full">
                 <FormLabel>Comment</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
                     placeholder="Looks good to me....."
                     maxLength={200}
+                    className="h-full"
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-
           <Button
             type="submit"
-            className="w-fit"
+            className="absolute -translate-y-[12%] right-5 top-1/2"
             isLoading={isPending}
             disabled={isPending}
           >
-            Submit
+            <Icons.send />
           </Button>
         </form>
       </Form>

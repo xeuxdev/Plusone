@@ -17,6 +17,7 @@ import {
   PlusIcon,
   Quote,
   Search,
+  Send,
   StrikethroughIcon,
   Trash,
   UnderlineIcon,
@@ -47,4 +48,5 @@ export const Icons = {
   posts: FileTextIcon,
   views: EyeIcon,
   comments: MessageCircleMore,
+  send: Send,
 };
