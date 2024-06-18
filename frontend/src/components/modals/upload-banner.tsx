@@ -71,6 +71,7 @@ export default function UploadPostBannerImage({
         if (res.secure_url) {
           data?.editor?.chain().focus().setImage({ src: res.secure_url }).run();
         }
+        setSelectedImage(undefined);
       });
     }
   }

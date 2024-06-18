@@ -128,7 +128,7 @@ async function editPost(req: APIRequest, res: Response) {
   }
 
   const { id: post_id } = req.params;
-  const { title, content, full_content } = req.body;
+  const { title, content, full_content, image } = req.body;
 
   if (!title || !content || !full_content) {
     return APIResponse("Bad Request", 400, res);
@@ -142,6 +142,7 @@ async function editPost(req: APIRequest, res: Response) {
       title: title,
       content: content,
       full_content: full_content,
+      image: image,
     },
   });
 

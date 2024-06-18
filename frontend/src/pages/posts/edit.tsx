@@ -8,7 +8,7 @@ import PostPreview from "@/components/editor/preview";
 import NotFound from "@/components/not-found";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/ui/loader";
-import { getFirstH1Content, stripFirstH1 } from "@/lib/utils";
+import { getFirstH1Content, getFirstImageUrl, stripFirstH1 } from "@/lib/utils";
 import useUserStore from "@/store/user";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +18,7 @@ export type EditPostType = {
   content: string;
   id: string;
   full_content: string;
+  image: string | null;
 };
 
 export default function EditBlogPage() {
@@ -34,6 +35,7 @@ export default function EditBlogPage() {
   function handleEditPost() {
     const title = getFirstH1Content(content);
     const newContent = stripFirstH1(content);
+    const image = getFirstImageUrl(content);
 
     if (!title || !newContent) {
       return;
@@ -44,6 +46,7 @@ export default function EditBlogPage() {
       title,
       content: newContent,
       full_content: content,
+      image: image || "",
     };
 
     editPost(payload);
