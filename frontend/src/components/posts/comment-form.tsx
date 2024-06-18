@@ -40,9 +40,7 @@ export default function PostCommentForm({ post_id }: Props) {
       comment: comment,
       post_id: post_id,
     }).then(() => {
-      form.reset({
-        comment: "",
-      });
+      form.reset();
     });
   }
 

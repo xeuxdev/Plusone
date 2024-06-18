@@ -39,7 +39,9 @@ export const APIs = {
   searchPosts: (query: string) => `/post/search?term=${query}`,
   createPost: "/post/create",
   editPost: (id: string) => `/post/${id}/edit`,
-  uploadBanner: "https://api.cloudinary.com/v1_1/dksup6zjc/image/upload",
+  uploadBanner: `https://api.cloudinary.com/v1_1/${
+    import.meta.env.VITE_UPLOAD_CLOUD_NAME
+  }/image/upload`,
 
   // comments
   createComment: (id: string) => `/post/${id}/comments/create`,

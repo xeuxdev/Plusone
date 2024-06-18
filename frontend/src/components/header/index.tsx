@@ -25,7 +25,7 @@ export default function Header() {
       <header className="fixed inset-0 z-50 w-full h-16 border-b-2 bg-background">
         <div className="flex items-center justify-between h-full max-w-6xl px-5 mx-auto ">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold">PlusOne</span>
+            <img src="/logo.svg" className="w-16 md:w-20 lg:w-24" />
           </Link>
           <div className="flex items-center gap-4">
             <Icons.search
