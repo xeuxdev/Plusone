@@ -4,25 +4,45 @@ import { APIResponse } from "../config/response";
 import { APIRequest } from "../types";
 
 async function getPosts(req: Request, res: Response) {
-  const posts = await db.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 20,
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+  const cursor = req.query.cursor;
+  const limit = 10;
 
-  if (!posts) {
-    return APIResponse("Failed to Fetch Posts", 500, res);
+  try {
+    let postsQuery;
+
+    if (!cursor) {
+      postsQuery = db.post.findMany({
+        orderBy: { createdAt: "desc" },
+        take: limit,
+        include: { author: { select: { name: true } } },
+      });
+    } else {
+      postsQuery = db.post.findMany({
+        orderBy: { createdAt: "desc" },
+        skip: parseInt(cursor.toString()),
+        take: limit,
+        include: { author: { select: { name: true } } },
+      });
+    }
+
+    const posts = await postsQuery;
+    const postsLength = await db.post.count();
+
+    if (!posts) {
+      return APIResponse("Failed to Fetch Posts", 500, res);
+    }
+
+    const hasNextPage = postsLength > parseInt(`${cursor}`) + limit;
+    const nextCursor = hasNextPage
+      ? (parseInt(`${cursor}`) + limit).toString()
+      : "null";
+
+    const payload = { posts, nextCursor, hasNextPage };
+
+    return APIResponse("Success", 200, res, payload);
+  } catch (error) {
+    return APIResponse("Internal Server Error", 500, res);
   }
-
-  return APIResponse("Success", 200, res, posts);
 }
 
 async function getUserPosts(req: APIRequest, res: Response) {
