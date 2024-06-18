@@ -51,7 +51,7 @@ export default function BlogDetailsPage() {
             </div>
 
             <div
-              className="p-2 *:text-lg md:*:text-xl w-full"
+              className="p-2 *:text-lg md:*:text-xl w-full *:has-[img]:py-2"
               dangerouslySetInnerHTML={{
                 __html: body,
               }}

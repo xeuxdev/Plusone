@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatDate, stripFirstImg } from "@/lib/utils";
+import { convertToPlainText, formatDate, stripFirstImg } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -38,7 +38,7 @@ export default function HomePage() {
                 <div
                   className="line-clamp-2 lg:text-xl"
                   dangerouslySetInnerHTML={{
-                    __html: stripFirstImg(post.content),
+                    __html: stripFirstImg(convertToPlainText(post.content)),
                   }}
                 />
               </CardDescription>

@@ -1,5 +1,5 @@
 import { useSearchPosts } from "@/api/posts/search-posts";
-import { formatDate } from "@/lib/utils";
+import { convertToPlainText, formatDate, stripFirstImg } from "@/lib/utils";
 import { ModalProps } from "@/types";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -67,13 +67,18 @@ export default function SearchPosts({
                   key={post.id}
                   className="flex flex-col rounded-md bg-card"
                 >
-                  <Link to={`/p/${post.id}`}>
+                  <Link
+                    to={`/p/${post.id}`}
+                    onClick={() => onOpenChange(false)}
+                  >
                     <CardHeader className="pb-2">
                       <CardTitle>{post.title}</CardTitle>
                       <CardDescription className="line-clamp-2">
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: post.content,
+                            __html: stripFirstImg(
+                              convertToPlainText(post.content)
+                            ),
                           }}
                         />
                       </CardDescription>

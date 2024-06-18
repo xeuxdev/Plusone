@@ -161,3 +161,14 @@ export function stripFirstImg(htmlString: string) {
   const regex = /<img.*?>/; // Matches the first img tag (any attributes)
   return htmlString.replace(regex, "");
 }
+
+export function convertToPlainText(htmlString: string) {
+  const textNode = document.createElement("div");
+  textNode.innerHTML = htmlString;
+  let text = "";
+
+  if (textNode) {
+    text = `${textNode.textContent?.trim()}`;
+  }
+  return text;
+}
