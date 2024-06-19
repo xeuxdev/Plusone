@@ -73,13 +73,10 @@ export default function DashboardPage() {
                   </Link>
 
                   <div className="flex items-center flex-wrap gap-1 min-[375px]:gap-3 *:text-muted-foreground *:capitalize *:lg:text-base *:text-sm">
-                    <p>
-                      <span className="font-semibold">published on</span>:{" "}
+                    <p className="flex items-center gap-2">
+                      <span className="font-semibold">published : </span>
                       {formatDate(item.createdAt.toString())}
-                    </p>
-                    <p>
-                      <span className="font-semibold">edited on</span>:{" "}
-                      {formatDate(item.updatedAt.toString())}
+                      <span>ago</span>
                     </p>
                   </div>
                 </div>
