@@ -62,7 +62,7 @@ export default function BlogDetailsPage() {
               </h1>
               <p className="text-lg text-muted-foreground">
                 By {data?.author.name} |{" "}
-                {formatDate(data?.createdAt.toString())} ago
+                {formatDate(data?.createdAt.toString())}
               </p>
             </div>
 
