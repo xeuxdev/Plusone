@@ -28,6 +28,7 @@ export const getRequest = async <T>(params: { url: string }) => {
 };
 
 export const APIs = {
+  // auth
   registerUser: "/user/register",
   loginUser: "/user/login",
 
@@ -42,6 +43,7 @@ export const APIs = {
   uploadBanner: `https://api.cloudinary.com/v1_1/${
     import.meta.env.VITE_UPLOAD_CLOUD_NAME
   }/image/upload`,
+  updatePostViews: (id: string) => `/post/${id}/views`,
 
   // comments
   createComment: (id: string) => `/post/${id}/comments/create`,

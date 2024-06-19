@@ -1,15 +1,31 @@
 import { useGetPostDetails } from "@/api/posts/get-post-details";
+import { useUpdatePostViews } from "@/api/posts/update-post-views";
 import BackButton from "@/components/back-button";
 import { Icons } from "@/components/icons";
 import NotFound from "@/components/not-found";
 import PostCommentForm from "@/components/posts/comment-form";
 import Loader from "@/components/ui/loader";
 import { formatDate, stripFirstImg } from "@/lib/utils";
+import useUserStore from "@/store/user";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function BlogDetailsPage() {
+  const { id } = useParams();
+  const { user } = useUserStore();
+
   const { data, isLoading, error } = useGetPostDetails();
+  const { mutate: updatePostViews } = useUpdatePostViews();
 
   const body = stripFirstImg(data?.content || "");
+
+  useEffect(() => {
+    if (data?.author.id === user?.id) return;
+
+    updatePostViews(id!);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, user, data]);
 
   if (isLoading) {
     return <Loader />;

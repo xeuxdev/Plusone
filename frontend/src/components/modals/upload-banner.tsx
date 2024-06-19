@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { ModalProps } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Upload } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -147,7 +146,7 @@ export default function UploadPostBannerImage({
               />
               <Button type="submit" isLoading={isUploading}>
                 Upload
-                <Upload className="w-4 ml-3" />
+                <Icons.upload className="w-4 ml-3" />
               </Button>
             </div>
           </form>

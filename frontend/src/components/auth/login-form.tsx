@@ -33,14 +33,14 @@ const loginSchema = z.object({
 export type LoginType = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
-  const { mutate, isPending } = useLoginUser();
+  const { mutate: loginUser, isPending } = useLoginUser();
 
   const form = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
   });
 
   function handleLogin(values: LoginType) {
-    mutate(values);
+    loginUser(values);
   }
 
   return (

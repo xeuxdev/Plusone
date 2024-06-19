@@ -23,10 +23,11 @@ export type EditPostType = {
 
 export default function EditBlogPage() {
   const { id } = useParams();
+  const { user } = useUserStore();
+  const navigate = useNavigate();
+
   const { data, isLoading } = useGetPostDetails();
   const { mutate: editPost, isPending } = useEditPost();
-  const navigate = useNavigate();
-  const { user } = useUserStore();
 
   const [content, setContent] = useState(data?.full_content || "");
   const [showPreview, setShowPreview] = useState(false);
@@ -65,9 +66,7 @@ export default function EditBlogPage() {
     };
 
     fetchData();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, user]);
+  }, [id, navigate, user]);
 
   if (!isMounted || isLoading) {
     return <Loader />;
@@ -101,6 +100,9 @@ export default function EditBlogPage() {
             setContent={setContent}
             type="edit"
           />
+          <p className="font-medium text-destructive">
+            Note: The First image would be used as the banner for the post.
+          </p>
         </>
       )}
     </>

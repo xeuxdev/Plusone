@@ -55,14 +55,14 @@ const registerSchema = z
 export type RegisterType = z.infer<typeof registerSchema>;
 
 export default function RegisterForm() {
-  const { mutate, isPending } = useRegisterUser();
+  const { mutate: registerUser, isPending } = useRegisterUser();
 
   const form = useForm<RegisterType>({
     resolver: zodResolver(registerSchema),
   });
 
   function handleSignUp(values: RegisterType) {
-    mutate(values);
+    registerUser(values);
   }
 
   return (

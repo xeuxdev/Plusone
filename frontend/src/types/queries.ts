@@ -6,7 +6,7 @@ export type QueryResponse<T> = {
   data: T;
 };
 
-export interface ErrorData {
+interface ErrorData {
   message: string;
   validationErrors?: string | [string] | [{ description: string }];
 }

@@ -50,7 +50,6 @@ export default function NewBlogPage() {
 
   useEffect(() => {
     const content = localStorage.getItem("new-post");
-    console.log(content, "content");
     if (content) {
       try {
         const parsedContent = JSON.parse(content);
@@ -72,7 +71,7 @@ export default function NewBlogPage() {
         <PostPreview content={content} setShowPreview={setShowPreview} />
       ) : (
         <>
-          <div className="flex items-center gap-5 ml-auto">
+          <div className="flex items-center gap-5 ml-auto ">
             <Button
               variant={"secondary"}
               onClick={() => {
@@ -86,6 +85,10 @@ export default function NewBlogPage() {
             </Button>
           </div>
           <MarkdownEditor content={content} setContent={setContent} />
+
+          <p className="font-medium text-destructive">
+            Note: The First image would be used as the banner for the post.
+          </p>
         </>
       )}
     </>

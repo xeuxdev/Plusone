@@ -3,16 +3,18 @@ import ProtectedRoute from "./components/auth/protected";
 import UnProtectedRoute from "./components/auth/un-protected";
 import ErrorBoundary from "./components/error-boundary";
 import { Toaster } from "./components/ui/toaster";
-import BlogDetailsPage from "./pages/posts/details";
-import EditBlogPage from "./pages/posts/edit";
-import NewBlogPage from "./pages/posts/new";
+
+import Layout from "./components/layout/layout";
+
 import DashboardPage from "./pages/dashboard";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 import NotFoundPage from "./pages/not-found";
+import BlogDetailsPage from "./pages/posts/details";
+import EditBlogPage from "./pages/posts/edit";
+import NewBlogPage from "./pages/posts/new";
 import SignUpPage from "./pages/signup";
 import Providers from "./providers";
-import Layout from "./components/layout";
 
 const router = createBrowserRouter([
   {

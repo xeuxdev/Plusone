@@ -12,6 +12,7 @@ import {
   ListOrdered,
   Loader,
   MessageCircleMore,
+  Moon,
   MoveLeftIcon,
   Pilcrow,
   PlusIcon,
@@ -19,8 +20,10 @@ import {
   Search,
   Send,
   StrikethroughIcon,
+  Sun,
   Trash,
   UnderlineIcon,
+  Upload,
 } from "lucide-react";
 
 export const Icons = {
@@ -33,6 +36,7 @@ export const Icons = {
   add: PlusIcon,
   image: Image,
   arrowLeft: MoveLeftIcon,
+  upload: Upload,
 
   bold: BoldIcon,
   strikeThrough: StrikethroughIcon,
@@ -49,4 +53,7 @@ export const Icons = {
   views: EyeIcon,
   comments: MessageCircleMore,
   send: Send,
+
+  light: Sun,
+  dark: Moon,
 };

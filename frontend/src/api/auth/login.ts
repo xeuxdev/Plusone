@@ -2,9 +2,8 @@ import { LoginType } from "@/components/auth/login-form";
 import { APIs, postRequest } from "@/lib/http-helpers";
 import { displayQueryError, showSuccess } from "@/lib/utils";
 import useUserStore from "@/store/user";
-import { ErrorData, QueryResponse } from "@/types/queries";
+import { QueryError, QueryResponse } from "@/types/queries";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +49,7 @@ export function useLoginUser() {
 
       navigate("/dashboard");
     },
-    onError(error: AxiosError<ErrorData>) {
+    onError(error: QueryError) {
       displayQueryError(error);
     },
   });

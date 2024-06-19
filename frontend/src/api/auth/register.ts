@@ -1,9 +1,8 @@
 import { RegisterType } from "@/components/auth/register-form";
 import { APIs, postRequest } from "@/lib/http-helpers";
 import { displayQueryError, showSuccess } from "@/lib/utils";
-import { ErrorData, QueryResponse } from "@/types/queries";
+import { QueryError, QueryResponse } from "@/types/queries";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
 export function registerUser(values: RegisterType) {
@@ -23,7 +22,7 @@ export function useRegisterUser() {
       showSuccess(data.message);
       navigate("/login");
     },
-    onError(error: AxiosError<ErrorData>) {
+    onError(error: QueryError) {
       displayQueryError(error);
     },
   });

@@ -14,10 +14,6 @@ import {
 import { Textarea } from "../ui/textarea";
 import { Icons } from "../icons";
 
-type Props = {
-  post_id: string;
-};
-
 const formSchema = z.object({
   comment: z
     .string({ required_error: "Please enter comment" })
@@ -28,7 +24,7 @@ export type CreateCommentType = z.infer<typeof formSchema> & {
   post_id: string;
 };
 
-export default function PostCommentForm({ post_id }: Props) {
+export default function PostCommentForm({ post_id }: { post_id: string }) {
   const { mutateAsync, isPending } = useCreateComment();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,40 +41,38 @@ export default function PostCommentForm({ post_id }: Props) {
   }
 
   return (
-    <>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmitComment)}
-          className="relative flex flex-col items-center w-full gap-5 md:flex-row"
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmitComment)}
+        className="relative flex flex-col items-center w-full gap-5 md:flex-row"
+      >
+        <FormField
+          control={form.control}
+          name="comment"
+          render={({ field }) => (
+            <FormItem className="w-full h-full">
+              <FormLabel>Comment</FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  placeholder="Looks good to me....."
+                  maxLength={200}
+                  className="h-full"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button
+          type="submit"
+          className="absolute -translate-y-[12%] right-5 top-1/2"
+          isLoading={isPending}
+          disabled={isPending}
         >
-          <FormField
-            control={form.control}
-            name="comment"
-            render={({ field }) => (
-              <FormItem className="w-full h-full">
-                <FormLabel>Comment</FormLabel>
-                <FormControl>
-                  <Textarea
-                    {...field}
-                    placeholder="Looks good to me....."
-                    maxLength={200}
-                    className="h-full"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button
-            type="submit"
-            className="absolute -translate-y-[12%] right-5 top-1/2"
-            isLoading={isPending}
-            disabled={isPending}
-          >
-            <Icons.send />
-          </Button>
-        </form>
-      </Form>
-    </>
+          <Icons.send />
+        </Button>
+      </form>
+    </Form>
   );
 }

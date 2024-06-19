@@ -11,7 +11,7 @@ import {
 import Loader from "@/components/ui/loader";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { convertToPlainText, formatDate, stripFirstImg } from "@/lib/utils";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -22,25 +22,23 @@ export default function HomePage() {
     threshold: 0.5,
   });
 
-  useEffect(() => {
+  const handleFetchNextPage = useCallback(() => {
     if (isIntersecting && hasNextPage) {
       fetchNextPage();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isIntersecting, hasNextPage]);
+  }, [isIntersecting, hasNextPage, fetchNextPage]);
+
+  useEffect(() => {
+    handleFetchNextPage();
+  }, [handleFetchNextPage]);
 
   if (!data) {
-    return (
-      <div className="mx-auto">
-        <Icons.spinner />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
     <>
       {data?.pages.map((group, i) => {
-        console.log(group, i);
         return (
           <React.Fragment key={i}>
             <section className="flex flex-col gap-5">
