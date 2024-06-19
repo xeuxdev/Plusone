@@ -2,6 +2,7 @@ import useUserStore from "@/store/user";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
+import { cookieNames } from "@/lib/utils";
 
 export default function Logout() {
   const { logout } = useUserStore();
@@ -10,7 +11,8 @@ export default function Logout() {
   function handleLogout() {
     logout();
 
-    Cookies.remove("plusone-auth");
+    Cookies.remove(cookieNames.auth);
+    Cookies.remove(cookieNames.expiresAt);
 
     navigate("/", {
       replace: true,

@@ -132,3 +132,8 @@ export function convertToPlainText(htmlString: string) {
   }
   return text;
 }
+
+export const cookieNames = {
+  auth: "plusone-auth",
+  expiresAt: "plusone-expiresAt",
+};

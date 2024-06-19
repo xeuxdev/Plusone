@@ -7,7 +7,9 @@ import { formatDate } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 export default function DashboardPage() {
-  const { data, isLoading } = useGetUserPosts();
+  const { data, isLoading, error } = useGetUserPosts();
+
+  console.log(error);
 
   if (isLoading) {
     return <Loader />;

@@ -1,6 +1,6 @@
 import { LoginType } from "@/components/auth/login-form";
 import { APIs, postRequest } from "@/lib/http-helpers";
-import { displayQueryError, showSuccess } from "@/lib/utils";
+import { cookieNames, displayQueryError, showSuccess } from "@/lib/utils";
 import useUserStore from "@/store/user";
 import { QueryError, QueryResponse } from "@/types/queries";
 import { useMutation } from "@tanstack/react-query";
@@ -34,12 +34,14 @@ export function useLoginUser() {
     onSuccess(data) {
       showSuccess(data.message);
 
-      Cookies.set("plusone-auth", data.data.token, {
+      Cookies.set(cookieNames.auth, data.data.token, {
         secure: true,
         sameSite: "strict",
         path: "/",
-        expires: 60 * 60 * 24,
+        expires: 86400000,
       });
+
+      Cookies.set(cookieNames.expiresAt, `${new Date().getTime() + 86400000}`);
 
       setUser({
         name: data.data.name,
