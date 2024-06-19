@@ -4,14 +4,16 @@
 
 **Description:**
 
-This project is a full-featured blog application that empowers users to create, manage, and interact with content. Here's what you can expect:
+This project is a blog application that empowers users to create, manage, and interact with content. Here's what you can expect:
 
 - User Management: Sign up, log in, and log out functionalities
 - Content Creation: Craft compelling blog posts using a user-friendly interface with markdown support for rich text formatting.
 - Post Management: Create, read, update, and delete blog posts with ease. Edit your existing content and keep your blog fresh.
-- Commenting System: Foster discussion and engagement by allowing users to leave comments on blog posts. This creates a dynamic platform for community interaction.
+- Commenting System: Allow users to leave comments on blog posts. This creates a dynamic platform for community interaction.
 - Search Functionality: Find specific content quickly using a built-in search function. Users can easily locate relevant posts based on keywords or topics.
-- Robust Backend: The application is powered by a secure and efficient backend API that handles user authentication and blog post management seamlessly.
+- Backend: The application is powered by a secure and efficient backend API that handles user authentication and blog post management seamlessly.
+
+To view the live site, [Click here](https://plusone-eight.vercel.app/)
 
 **Table of Contents:**
 
@@ -43,11 +45,15 @@ This section provides instructions on how to set up and run the project locally.
 
 3. **Install Dependencies:**
 
-   ```bash
-   pnpm install  # or yarn install or npm install
-   ```
+cd into the frontend and backend folders, then run:
+
+```bash
+pnpm install  # or yarn install or npm install
+```
 
 4. **Setup Environment Variables**
+
+in the respective folders, create a `.env` file and insert the following:
 
 - Frontend
 
@@ -106,9 +112,11 @@ This section provides instructions on how to set up and run the project locally.
 
 ## Usage
 
-Provide instructions or tutorials on how to use the project's features. You can break this down into specific use cases or demonstrate common tasks.
-
-Consider using code examples, screenshots, or diagrams to enhance clarity.
+- Sign up, Login & Logout
+- Create, Read, Update, Delete Blog posts
+- Search for blog posts (all users)
+- view blog posts (all users)
+- commenting system (available to all users)
 
 ## Built With
 
@@ -121,15 +129,13 @@ Consider using code examples, screenshots, or diagrams to enhance clarity.
 - Database
   - MySQL
 
-README file with setup instructions and an overview of the approach used, some assumptions made and why you have selected your choice of assessment.
-
 ## Overview of the Approach
 
 So a brief overview of my approach to building this app is as follows:
 
 ### **The Project setup**
 
-I Opted to use a monorepo style for the codebase where i have a frontend and backend folder separately. This was because it is easy to manage in a single repo as well as to deploy to separate services. For the database, i used a local database when developing and a hosted database on render for the live site.
+I Opted to use a monorepo style for the codebase where i have a frontend and backend folder separately. This was because it is easy to manage them in a single repo as well as to deploy to separate services. For the database, i used a local database when developing and a hosted database on [Render](https://render.com) for the live site.
 
 - **Frontend**:
   - initialized a new project with vite & TypeScript, setup tailwind for styling and Shadcn UI for composable, reuseable and fully customizable components.
@@ -143,7 +149,7 @@ I Opted to use a monorepo style for the codebase where i have a frontend and bac
 ### **Backend Development**
 
 - **Folder Structure**:
-  - I wanted to keep this very simple so I setup the files i would need, the controllers, the routes, middleware, configs and utilities functions,
+  - I wanted to keep this very simple so I setup the files i would need, the controllers, the routes, middleware, configs and utility functions,
 - **Middleware**:
   - Implement middleware for request parsing and user verification.
 - **API Endpoints**:
@@ -159,10 +165,10 @@ I Opted to use a monorepo style for the codebase where i have a frontend and bac
 
 - **Folder Structure**:
   - /pages -> for all pages,
-  - /components -> for any kind of components (reuseable - single use).
+  - /components -> for any kind of components (reuseable / single use).
   - /api -> for api integrating functions and hooks.
   - /hooks -> for hooks.
-  - /lib -> for interfacing with external libraries and for utilities functions.
+  - /lib -> for interfacing with external libraries and for utility functions.
   - /providers -> for components that wrap the app with context.
   - /store -> state management.
   - /types -> for general and query related types.
@@ -175,7 +181,7 @@ I Opted to use a monorepo style for the codebase where i have a frontend and bac
 - **Styling**:
   - Utilize Tailwind CSS classes to style the components for a responsive design.
 - **Utilities**
-  - I wrote a-lot of utility function to parse the html from the markdown editor
+  - I wrote a-lot of utility function to parse the html from the markdown editor, I might optimize this later, I wanted to keep it simple and not use an external library.
 
 ### **Deployment**
 
@@ -205,7 +211,7 @@ In general, the approaches used in this project is for future maintainability, c
 
 4. **State Management**:
 
-   - Chose to use React's built-in hooks for state management because the requirements make the app simple enough not to require more complex state management solutions like Redux. I opted for zustand due to its simplicity and easy to read and maintain code.
+   - I Chose to use React's built-in hooks for state management because the requirements make the app simple enough not to require more complex state management solutions like Redux. I opted for zustand due to its simplicity and easy to read and maintain code.
 
 5. **RESTful API**:
 
@@ -217,11 +223,7 @@ In general, the approaches used in this project is for future maintainability, c
 
 7. **Functionalities**:
 
-   - Assumed the user would require infinite scrolling on the home page, prevent users from editing another user posts, store JWT token in cookies, prevent server sleep by keeping it worm using cron jobs. A Not found Page UI as well as a not found component for resources. The user should be logged out automatically after the auth token expires
-
-Certainly! Here's an improved version of that section:
-
----
+- Assumed the user would require infinite scrolling on the home page, prevent users from editing another user posts, store JWT token in cookies, prevent server sleep by keeping it worm using cron jobs. A Not found Page UI as well as a not found component for resources. The user should be logged out automatically after the auth token expires
 
 ## Reason for Selecting this Assessment
 
