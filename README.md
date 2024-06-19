@@ -217,7 +217,7 @@ In general, the approaches used in this project is for future maintainability, c
 
 7. **Functionalities**:
 
-   - Assumed the user would require infinite scrolling on the home page, prevent users from editing another user posts, store JWT token in cookies, prevent server sleep by keeping it worm using cron jobs.
+   - Assumed the user would require infinite scrolling on the home page, prevent users from editing another user posts, store JWT token in cookies, prevent server sleep by keeping it worm using cron jobs. A Not found Page UI as well as a not found component for resources. The user should be logged out automatically after the auth token expires
 
 Certainly! Here's an improved version of that section:
 

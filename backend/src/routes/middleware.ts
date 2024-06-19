@@ -29,6 +29,6 @@ export function verifyUserToken(
     req.user = verifiedUser;
     next();
   } catch (error) {
-    return APIResponse("Invalid Token", 500, res);
+    return APIResponse("Invalid Token", 400, res);
   }
 }
