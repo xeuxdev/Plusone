@@ -13,6 +13,7 @@ import {
 } from "../ui/form";
 import { Textarea } from "../ui/textarea";
 import { Icons } from "../icons";
+import useUserStore from "@/store/user";
 
 const formSchema = z.object({
   comment: z
@@ -22,10 +23,12 @@ const formSchema = z.object({
 
 export type CreateCommentType = z.infer<typeof formSchema> & {
   post_id: string;
+  commenter_name: string;
 };
 
 export default function PostCommentForm({ post_id }: { post_id: string }) {
   const { mutateAsync, isPending } = useCreateComment();
+  const { user } = useUserStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,8 +38,11 @@ export default function PostCommentForm({ post_id }: { post_id: string }) {
     mutateAsync({
       comment: comment,
       post_id: post_id,
+      commenter_name: user?.name || "",
     }).then(() => {
-      form.reset();
+      form.reset({
+        comment: "",
+      });
     });
   }
 
