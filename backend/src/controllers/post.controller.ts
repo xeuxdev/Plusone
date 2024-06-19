@@ -229,9 +229,15 @@ async function getPostById(req: APIRequest, res: Response) {
     return APIResponse("Post not found", 404, res);
   }
 
-  await db.post.update({
+  return APIResponse("Post Found", 200, res, post);
+}
+
+async function updatePostViews(req: APIRequest, res: Response) {
+  const { id: post_id } = req.params;
+
+  const editPost = await db.post.update({
     where: {
-      id: post.id,
+      id: post_id,
     },
     data: {
       viewCount: {
@@ -240,7 +246,11 @@ async function getPostById(req: APIRequest, res: Response) {
     },
   });
 
-  return APIResponse("Post Found", 200, res, post);
+  if (!editPost) {
+    return APIResponse("Failed to update post", 500, res);
+  }
+
+  return APIResponse("Successfully Edited Post", 200, res, { id: editPost.id });
 }
 
 async function searchPosts(req: Request, res: Response) {
@@ -315,6 +325,7 @@ export default {
   editPost,
   deletePost,
   getPostById,
+  updatePostViews,
   searchPosts,
   createComment,
   getComments,
